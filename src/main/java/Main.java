@@ -1,0 +1,51 @@
+import controller.AtmController;
+import controller.BankController;
+import dto.User;
+import dto.UserCard;
+
+import javax.swing.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        BankController bankController = new BankController();
+
+        Date expiryDate = new Date(2022, Calendar.JUNE,22);
+
+
+        /*
+        Another way for making date
+        try {
+            expiryDate =new SimpleDateFormat("yyyy-MM-dd").parse("2022-06-22");
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+         */
+
+
+        UserCard card = new UserCard(expiryDate, 1245.50d, 2022);
+        User user1 = new User("Inese", "12345678",card,2.50);
+
+        bankController.createUser(user1);
+
+        AtmController atmController = new AtmController();
+
+        atmController.setBankController(bankController);
+        atmController.insertCard(user1.getCard());
+
+        JOptionPane.showMessageDialog(null, atmController.deposit());
+        JOptionPane.showMessageDialog(null, atmController.withdraw());
+
+        JOptionPane.showMessageDialog(null, atmController.validateCard());
+
+        JOptionPane.showMessageDialog(null, atmController.deposit());
+        JOptionPane.showMessageDialog(null, atmController.withdraw());
+
+        JOptionPane.showMessageDialog(null, atmController.removeCard());
+        JOptionPane.showMessageDialog(null, atmController.withdraw());
+    }
+}

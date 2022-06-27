@@ -1,5 +1,6 @@
 package dto;
 
+import java.util.Random;
 import java.util.UUID;
 
 public class User {
@@ -24,6 +25,14 @@ public class User {
         this.name = name;
         this.accountNumber = accountNumber;
         this.card = card;
+        this.transactionFee = transactionFee;
+    }
+
+    public User(String name, UserCard card, double transactionFee) {
+        this.accountNumber = String.valueOf(new Random().nextInt(1000));
+        this.name = name;
+        this.card = card;
+        this.id = UUID.randomUUID();
         this.transactionFee = transactionFee;
     }
 

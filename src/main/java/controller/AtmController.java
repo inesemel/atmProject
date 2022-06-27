@@ -7,9 +7,9 @@ import javax.swing.*;
 
 public class AtmController {
 
-    private BankController bankController;
+    public BankController bankController;
     private UserCard activeCard;
-private boolean isValidated = false;
+    private boolean isValidated = false;
     public AtmController() {
 
     }
@@ -22,13 +22,8 @@ private boolean isValidated = false;
         this.activeCard = userCard;
     }
 
-    public String validateCard() {
+    public String validateCard(int cardPin) {
         try{
-            User currentUser = bankController.findUserByCardId(this.activeCard.getId());
-
-            int cardPin = Integer.parseInt(
-                    JOptionPane.showInputDialog("Welcome " + currentUser.getName()+ ", Please enter your pin: ")
-            );
             this.isValidated = this.activeCard.isPinValid(cardPin);
             if (!this.isValidated) return "Invalid Pin";
 
@@ -44,19 +39,16 @@ private boolean isValidated = false;
         this.bankController = bankController;
     }
 
-    public String deposit() {
+    public String deposit(Double amountToDeposit) {
         if(!isValidated) return "Please validate your card";
-        double amountToDeposit = Double.parseDouble(
-                JOptionPane.showInputDialog("Enter amount to deposit: "));
+
         this.activeCard.setBalance(this.activeCard.getBalance() + amountToDeposit);
 
         return "Deposit successful, new balance: " + this.activeCard.getBalance();
     }
 
-    public String withdraw() {
+    public String withdraw(Double amountToWithdraw) {
         if(!isValidated) return "Please validate your card";
-        double amountToWithdraw = Double.parseDouble(
-                JOptionPane.showInputDialog("Enter amount to withdraw: "));
 
         double currentBalance = this.activeCard.getBalance();
         if (currentBalance < amountToWithdraw) return "Insufficient balance";
@@ -71,6 +63,11 @@ private boolean isValidated = false;
         this.isValidated = false;
 
         return "Good bye!";
+    }
+
+    public String getUserBalance() {
+        if (!isValidated) return "Please validate your card";
+        return "Your current balance is " + this.activeCard.getBalance();
     }
 
 }

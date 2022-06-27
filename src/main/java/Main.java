@@ -1,5 +1,6 @@
 import controller.AtmController;
 import controller.BankController;
+import controller.MenuController;
 import dto.User;
 import dto.UserCard;
 
@@ -12,9 +13,12 @@ public class Main {
 
     public static void main(String[] args) {
 
-        BankController bankController = new BankController();
+        MenuController menuController = new MenuController();
+        menuController.start();
 
-        Date expiryDate = new Date(2022, Calendar.JUNE,22);
+        /*BankController bankController = new BankController();
+
+        Date expiryDate = new Date(2022, Calendar.JUNE,22);*/
 
 
         /*
@@ -27,7 +31,7 @@ public class Main {
          */
 
 
-        UserCard card = new UserCard(expiryDate, 1245.50d, 2022);
+       /* UserCard card = new UserCard(expiryDate, 1245.50d, 2022);
         User user1 = new User("Inese", "12345678",card,2.50);
 
         bankController.createUser(user1);
@@ -36,6 +40,8 @@ public class Main {
 
         atmController.setBankController(bankController);
         atmController.insertCard(user1.getCard());
+
+
 
         JOptionPane.showMessageDialog(null, atmController.deposit());
         JOptionPane.showMessageDialog(null, atmController.withdraw());
@@ -46,6 +52,6 @@ public class Main {
         JOptionPane.showMessageDialog(null, atmController.withdraw());
 
         JOptionPane.showMessageDialog(null, atmController.removeCard());
-        JOptionPane.showMessageDialog(null, atmController.withdraw());
+        JOptionPane.showMessageDialog(null, atmController.withdraw());*/
     }
 }
